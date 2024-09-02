@@ -33,31 +33,30 @@ class Order:
             if item.lower()=="fin":
                 break #El pedido terminara de hacerse cuando el usuario escriba "fin"
             elif item.lower() in menu_items:
-                self.order_list.append(menu_items[item.lower()].name) #Los productos de agregan a la lista "order_list unicamente si hacen parte de las claves del diccionario "menu_items"
+                self.order_list.append(menu_items[item.lower()]) #Los productos de agregan a la lista "order_list unicamente si hacen parte de las claves del diccionario "menu_items"
                                                                       #A la lista se agraga el nombre objeto que corresponidia a la clave ingresada por el usiario
             else:
                 print(f"El producto '{item}' no esta en el menu. Ingrese nuevamente su pedido: ")
                 True #En caso de que el producto ingresado no corresponda a ninguna de las claves del diccionario, se guardara lo 
                      #anteriormente ingresado y se volvera a hacer el pedido.
         print("\n")
-        print (f"-> Order: {self.order_list}")#-> Order: (lista con los nombres de los objetos)
+        print (f"-> Order: {[item.name for item in self.order_list]}")#-> Order: (lista con los nombres de los objetos)
     
 
     def total_bill(self): #metodo para calcular el valor total a pagar por el pedido
 
         self.bill=0 #se inicializa la la cuenta en 0
         for product in self.order_list: #por cada producto en la lista de la orden del usuario
-            if product.lower() in menu_items: #si el producto hace parte de las claves del diccionario  "menu_items"
-                self.bill+=menu_items[product.lower()].price #se accede al atributo "price" de cada uno de los objetos y se acumulan a 0.
+                self.bill+=mproduct.price #se accede al atributo "price" de cada uno de los objetos y se acumulan a 0.
         
         print(f"->TOTAL A PAGAR = ${self.bill}") #"->TOTAL A PAGAR = $suma de los precios"
 
     def discounts(self): #metodo para hacer descuentos al pedido
-        beverage_count=sum(isinstance(menu_items[item.lower()], Beverage) for item in self.order_list)
+        beverage_count=sum(isinstance(item, Beverage) for item in self.order_list)
         # Suma 1 al contador de bebidas si el elemento en la orden es una instancia de la clase Beverage
-        appetizer_count=sum(isinstance(menu_items[item.lower()], Appetizer) for item in self.order_list)
+        appetizer_count=sum(item, Appetizer) for item in self.order_list)
         # Suma 1 al contador de bebidas si el elemento en la orden es una instancia de la clase Appetizer
-        main_course_count=sum(isinstance(menu_items[item.lower()], MainCourse) for item in self.order_list)
+        main_course_count=sum(item, MainCourse) for item in self.order_list)
         # Suma 1 al contador de bebidas si el elemento en la orden es una instancia de la clase MainCourse
         
         discount=0
@@ -93,6 +92,10 @@ class Order:
         else: 
             print(f"Descuento a aplicar: 0$")# En caso de que no se cumpla con ninguno de los requisitos para descuento
                                              #se imprimira que el "Descuento a aplicar es igual a 0$""
+    
+    def __iter__(self):
+        I=OrderIterator(self.order_list)
+        return I
 
 class OrderIterator:
     def __init__(self, order_list):
