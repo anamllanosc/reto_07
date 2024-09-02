@@ -94,6 +94,22 @@ class Order:
             print(f"Descuento a aplicar: 0$")# En caso de que no se cumpla con ninguno de los requisitos para descuento
                                              #se imprimira que el "Descuento a aplicar es igual a 0$""
 
+class OrderIterator:
+    def __init__(self, order_list):
+        self.order_list=order_list
+        self.index=0
+
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.index < len(self.order_list):
+            item= self.order_list[self.index]
+            self.index+=1
+            return item
+        else:
+            raise StopIteration
+
         
     
 #Objetos de la clase Beverages
