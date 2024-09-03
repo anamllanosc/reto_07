@@ -96,7 +96,7 @@ class Order:
     def __iter__(self):
         I=OrderIterator(self.order_list)
         return I
-
+#Implementación de iterador para la clase Order. Recorre los productos de order list 
 class OrderIterator:
     def __init__(self, order_list):
         self.order_list=order_list
