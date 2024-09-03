@@ -42,11 +42,12 @@ class Order:
         print("\n")
         print (f"-> Order: {[item.name for item in self.order_list]}")#-> Order: (lista con los nombres de los objetos)
     
+    
 
     def total_bill(self): #metodo para calcular el valor total a pagar por el pedido
 
         self.bill=0 #se inicializa la la cuenta en 0
-        for product in self.order_list: #por cada producto en la lista de la orden del usuario
+        for product in self: #por cada producto en la lista de la orden del usuario
                 self.bill+=product.price #se accede al atributo "price" de cada uno de los objetos y se acumulan a 0.
         
         print(f"->TOTAL A PAGAR = ${self.bill}") #"->TOTAL A PAGAR = $suma de los precios"
@@ -92,29 +93,27 @@ class Order:
         else: 
             print(f"Descuento a aplicar: 0$")# En caso de que no se cumpla con ninguno de los requisitos para descuento
                                              #se imprimira que el "Descuento a aplicar es igual a 0$""
-    
+
     def __iter__(self):
-        I=OrderIterator(self.order_list)
-        return I
-#Implementación de iterador para la clase Order. Recorre los productos de order list 
+        return OrderIterator(self.order_list)
+
 class OrderIterator:
     def __init__(self, order_list):
-        self.order_list=order_list
-        self.index=0
+        self.order_list = order_list
+        self.index = 0
 
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         if self.index < len(self.order_list):
-            item= self.order_list[self.index]
-            self.index+=1
+            item = self.order_list[self.index]
+            self.index += 1
             return item
         else:
             raise StopIteration
-
-        
     
+
 #Objetos de la clase Beverages
 coffe=Beverage("Coffe",3000,"Hot")
 chocolate=Beverage("Chocolate",3500,"Hot")
