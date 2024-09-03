@@ -47,16 +47,16 @@ class Order:
 
         self.bill=0 #se inicializa la la cuenta en 0
         for product in self.order_list: #por cada producto en la lista de la orden del usuario
-                self.bill+=mproduct.price #se accede al atributo "price" de cada uno de los objetos y se acumulan a 0.
+                self.bill+=product.price #se accede al atributo "price" de cada uno de los objetos y se acumulan a 0.
         
         print(f"->TOTAL A PAGAR = ${self.bill}") #"->TOTAL A PAGAR = $suma de los precios"
 
     def discounts(self): #metodo para hacer descuentos al pedido
         beverage_count=sum(isinstance(item, Beverage) for item in self.order_list)
         # Suma 1 al contador de bebidas si el elemento en la orden es una instancia de la clase Beverage
-        appetizer_count=sum(item, Appetizer) for item in self.order_list)
+        appetizer_count=sum(isinstance(item, Appetizer) for item in self.order_list)
         # Suma 1 al contador de bebidas si el elemento en la orden es una instancia de la clase Appetizer
-        main_course_count=sum(item, MainCourse) for item in self.order_list)
+        main_course_count=sum(isinstance(item, MainCourse) for item in self.order_list)
         # Suma 1 al contador de bebidas si el elemento en la orden es una instancia de la clase MainCourse
         
         discount=0
