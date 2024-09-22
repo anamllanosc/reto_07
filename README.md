@@ -95,9 +95,9 @@ class Order:
                                              #se imprimira que el "Descuento a aplicar es igual a 0$""
 
     def __iter__(self):
-        return OrderIterator(self.order_list)
+        return OrderIterator(self.order_list) #Iterador para recorrer el iterable
 
-class OrderIterator:
+class OrderIterator: #Iterador
     def __init__(self, order_list):
         self.order_list = order_list
         self.index = 0
